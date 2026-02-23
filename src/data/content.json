@@ -1,0 +1,403 @@
+{
+  "heroMedia": {
+    "imageSrc": "/hero-arthur-2024.jpeg",
+    "imageAlt": "Arthur Bont tijdens een drumperformance",
+    "posterSrc": "/hero-arthur-2024.jpeg",
+    "caption": "Live performance"
+  },
+  "sectionHeaders": {
+    "home": {
+      "title": "Arthur Bont",
+      "intro": "Drummer, percussionist en cajon specialist met focus op live, studio en educatie."
+    },
+    "bio": {
+      "title": "Bio",
+      "intro": "Ervaren podium- en studiomuzikant met brede samenwerkingservaring in binnen- en buitenland."
+    },
+    "milk": {
+      "title": "Milk 2.0",
+      "intro": "Vast project waarin songwriting, tekst en productie samenkomen."
+    },
+    "discografie": {
+      "title": "Discografie",
+      "intro": "Selectie van releases in chronologische volgorde van nieuw naar oud."
+    },
+    "dvd": {
+      "title": "DVD Cajon Spelen",
+      "intro": "Toegankelijke Nederlandstalige instructie-dvd voor beginners en gevorderden."
+    },
+    "gigs": {
+      "title": "Gigs/Studio",
+      "intro": "Boekbaar voor live-optredens en studio-opnames op drums, cajon en percussie."
+    },
+    "optredens": {
+      "title": "Optredens",
+      "intro": "Aankomende data en een archief van eerdere tours en voorstellingen."
+    },
+    "lessen": {
+      "title": "Lessen",
+      "intro": "Drum- en cajonlessen in Utrecht, inclusief workshops op aanvraag."
+    },
+    "contact": {
+      "title": "Contact",
+      "intro": "Direct contact voor boekingen, lessen en studio-aanvragen."
+    }
+  },
+  "richTextBlocks": [
+    {
+      "id": "bio-career",
+      "sectionId": "bio",
+      "heading": "Carriere-overzicht",
+      "body": [
+        "Als bandlid van Louisiana Radio speelde Arthur tussen 1991 en 1999 op festivals en in het binnen- en buitenlandse clubcircuit.",
+        "Daarna volgden Europese tours met internationale artiesten uit blues, rock en singer-songwriter, met optredens in ruim dertig landen."
+      ]
+    },
+    {
+      "id": "bio-studio",
+      "sectionId": "bio",
+      "heading": "Studio en theater",
+      "body": [
+        "Als studiomuzikant speelt Arthur op drums en percussie op albums, tracks en producties.",
+        "Daarnaast werkte hij mee aan theatertournees en voorstellingen met onder meer De Andersons, Jeroen Schipper en Hans Visser & Friends."
+      ]
+    },
+    {
+      "id": "gigs-services",
+      "sectionId": "gigs",
+      "heading": "Aanbod",
+      "body": [
+        "Live: inzetbaar voor concerten, theatershows en festivals.",
+        "Studio: inspelen van drum- en percussiepartijen voor albums, losse tracks en producties."
+      ]
+    },
+    {
+      "id": "milk-story",
+      "sectionId": "milk",
+      "heading": "Projectverhaal",
+      "body": [
+        "Milk 2.0 is het vervolg op de band MILK, met een vaste bezetting en focus op muziek maken vanuit artistieke vrijheid.",
+        "Het project draait om eigen liedjes, samenwerking en productie zonder industrie-gedreven druk."
+      ]
+    }
+  ],
+  "highlightItems": [
+    {
+      "id": "highlight-1",
+      "label": "Theatertournees",
+      "description": "Voorstellingen met onder meer Holland America Lijn, De Andersons en Sjors van der Panne.",
+      "period": "Doorlopend"
+    },
+    {
+      "id": "highlight-2",
+      "label": "Studio releases",
+      "description": "Opnames op drums, cajon en percussie voor singles, EPs, albums en dvd-producties.",
+      "period": "1991 - heden"
+    },
+    {
+      "id": "highlight-3",
+      "label": "Internationale ervaring",
+      "description": "Tours en optredens in Europa, Verenigde Staten, Afrika en Canada.",
+      "period": "Meerdere periodes"
+    }
+  ],
+  "mediaItems": [
+    {
+      "id": "media-1",
+      "title": "Arthur Bont Drumsolo",
+      "videoUrl": "https://www.youtube.com/watch?v=awJ13Fa2EiY"
+    },
+    {
+      "id": "media-2",
+      "title": "\"Eighty-Five\" door Susan Jane (Susan Zeegers)",
+      "videoUrl": "https://www.youtube.com/watch?v=2P49xhVfLyw"
+    },
+    {
+      "id": "media-3",
+      "title": "Arthur Bont Drumsolo met percussie",
+      "videoUrl": "https://www.youtube.com/watch?v=BRJ7WqtPcew"
+    },
+    {
+      "id": "media-4",
+      "title": "Osmosis (J. Koolen)",
+      "videoUrl": "https://www.youtube.com/watch?v=ZMPt1l5hzwA"
+    },
+    {
+      "id": "media-5",
+      "title": "Arthur Bont Drumsolo met loop",
+      "videoUrl": "https://www.youtube.com/watch?v=W2eqGZxjlLQ"
+    },
+    {
+      "id": "media-6",
+      "title": "Summernight Madness (K. Lux/J.M. Aers)",
+      "videoUrl": "https://www.youtube.com/watch?v=LNelQtOiKbw"
+    }
+  ],
+  "discographyItems": [
+    {
+      "id": "disc-2024-1",
+      "artist": "Remco en Michelle",
+      "title": "Ster",
+      "releaseType": "Single",
+      "year": 2024,
+      "platformUrl": "https://open.spotify.com/",
+      "coverAlt": "Releasecover Remco en Michelle - Ster"
+    },
+    {
+      "id": "disc-2024-2",
+      "artist": "Remco van den Weerdt",
+      "title": "Mijn Bloed",
+      "releaseType": "EP",
+      "year": 2024,
+      "platformUrl": "https://open.spotify.com/",
+      "coverAlt": "Releasecover Remco van den Weerdt - Mijn Bloed"
+    },
+    {
+      "id": "disc-2024-3",
+      "artist": "Rafael Hekker",
+      "title": "Chasing The Dragon",
+      "releaseType": "EP",
+      "year": 2024,
+      "platformUrl": "https://open.spotify.com/",
+      "coverAlt": "Releasecover Rafael Hekker - Chasing The Dragon"
+    },
+    {
+      "id": "disc-2023-1",
+      "artist": "De Andersons",
+      "title": "Tyst I Mig",
+      "releaseType": "Single",
+      "year": 2023,
+      "platformUrl": "https://open.spotify.com/",
+      "coverAlt": "Releasecover De Andersons - Tyst I Mig"
+    },
+    {
+      "id": "disc-2023-2",
+      "artist": "Nina Lynn",
+      "title": "A Taste of The Wild",
+      "releaseType": "LP",
+      "year": 2023,
+      "label": "Stickley Country Records",
+      "coverAlt": "Releasecover Nina Lynn - A Taste of The Wild"
+    },
+    {
+      "id": "disc-2023-3",
+      "artist": "Jeroen Schipper",
+      "title": "Badderzee",
+      "releaseType": "Album",
+      "year": 2023,
+      "label": "Sony Music",
+      "platformUrl": "https://open.spotify.com/",
+      "coverAlt": "Releasecover Jeroen Schipper - Badderzee"
+    },
+    {
+      "id": "disc-2015-1",
+      "artist": "Milk 2.0",
+      "title": "Tales Of The Unknown",
+      "releaseType": "Album",
+      "year": 2015,
+      "coverAlt": "Releasecover Milk 2.0 - Tales Of The Unknown"
+    },
+    {
+      "id": "disc-2014-1",
+      "artist": "Arthur Bont",
+      "title": "Cajon Spelen / Playing the Cajon",
+      "releaseType": "DVD",
+      "year": 2014,
+      "coverAlt": "Cover van Cajon Spelen / Playing the Cajon"
+    },
+    {
+      "id": "disc-1991-1",
+      "artist": "Louisiana Radio",
+      "title": "Playwolf",
+      "releaseType": "Album",
+      "year": 1991,
+      "coverAlt": "Releasecover Louisiana Radio - Playwolf"
+    }
+  ],
+  "lessonBlocks": [
+    {
+      "id": "lesson-drum",
+      "lessonType": "drum",
+      "duration": "In overleg via Drummersplace",
+      "rate": "Actuele prijzen via Drummersplace",
+      "location": "Drummersplace, Oudegracht Utrecht",
+      "availability": "Op aanvraag",
+      "externalLink": "https://www.drummersplace.nl"
+    },
+    {
+      "id": "lesson-cajon",
+      "lessonType": "cajon",
+      "duration": "60 minuten",
+      "rate": "EUR 25",
+      "location": "Drummersplace, Oudegracht Utrecht",
+      "availability": "Dinsdag en donderdag ochtend, woensdagavond in overleg",
+      "externalLink": "https://www.drummersplace.nl"
+    },
+    {
+      "id": "lesson-workshop",
+      "lessonType": "workshop",
+      "duration": "In overleg",
+      "rate": "Op aanvraag",
+      "location": "Drummersplace of op locatie",
+      "availability": "Op aanvraag",
+      "externalLink": "https://www.drummersplace.nl"
+    }
+  ],
+  "projectCards": [
+    {
+      "id": "milk-main",
+      "projectName": "Milk 2.0",
+      "shortDescription": "Vervolg op de band MILK, met focus op eigen songs en productie vanuit artistieke vrijheid.",
+      "lineup": [
+        "Diana van Achterbergh - zang",
+        "Dirk Vermeij - gitaar, zang",
+        "Janos Koolen - snaren, toetsen",
+        "Lucas Beukers - bas",
+        "Arthur Bont - drums, percussie"
+      ],
+      "link": "http://milk-music.nl/"
+    }
+  ],
+  "productInfo": {
+    "summary": "Op de dvd laat Arthur op toegankelijke wijze basistechnieken, oefeningen, grooves en beats zien, inclusief toepassingen met hi-hat, brushes en microfoonpraktijk.",
+    "contentPoints": [
+      "Basistechnieken met oefeningen",
+      "Grooves en beats voorgedaan in context",
+      "Combineren met hi-hat en spelen met brushes",
+      "Tips voor microfoongebruik live en in studio"
+    ],
+    "orderSteps": [
+      "Maak EUR 37 over (inclusief verzendkosten) naar NL97 INGB 0003573985 t.n.v. Arthur Bont, Utrecht, o.v.v. Cajon DVD.",
+      "Mail naam en adresgegevens naar apjbont@yahoo.com.",
+      "Na ontvangst van de betaling wordt de dvd verstuurd."
+    ],
+    "price": "EUR 37 incl. verzendkosten",
+    "paymentDetails": "NL97 INGB 0003573985 t.n.v. Arthur Bont, Utrecht",
+    "contactEmail": "apjbont@yahoo.com"
+  },
+  "contactInfo": {
+    "phone": "+31 (0)6 150 85 978",
+    "email": "apjbont@yahoo.com",
+    "formRecipient": "apjbont@yahoo.com",
+    "practicalInfo": "Beschikt over eigen vervoer, instrumenten en benodigde papieren."
+  },
+  "partnerLogos": [
+    {
+      "id": "partner-ahead",
+      "name": "Ahead Armor Cases",
+      "logoAlt": "Logo van Ahead Armor Cases",
+      "url": "http://www.aheadarmorcases.com/"
+    },
+    {
+      "id": "partner-metro",
+      "name": "Metrophones",
+      "logoAlt": "Logo van Metrophones",
+      "url": "http://www.bigbangdist.com/metrophones.htm"
+    },
+    {
+      "id": "partner-drumgear",
+      "name": "Drumgear",
+      "logoAlt": "Logo van Drumgear",
+      "url": "http://www.drumgear.dk/"
+    },
+    {
+      "id": "partner-schlagwerk",
+      "name": "Schlagwerk",
+      "logoAlt": "Logo van Schlagwerk",
+      "url": "http://www.schlagwerk.com/"
+    },
+    {
+      "id": "partner-yamaha",
+      "name": "Yamaha",
+      "logoAlt": "Logo van Yamaha Drums",
+      "url": "http://nl.yamaha.com/nl/products/musical-instruments/drums/"
+    },
+    {
+      "id": "partner-r3",
+      "name": "R3 Music",
+      "logoAlt": "Logo van R3 Music",
+      "url": "http://www.r3music.nl/"
+    }
+  ],
+  "upcomingShows": [
+    {
+      "id": "upcoming-info",
+      "title": "Nieuwe data volgen",
+      "context": "Aankomende optredens worden hier gepubliceerd.",
+      "period": "Binnenkort"
+    }
+  ],
+  "archiveShows": [
+    {
+      "id": "archive-1",
+      "title": "Holland Amerika Lijn met Jack Poels",
+      "context": "Theatertournee",
+      "period": "Archief",
+      "location": "Nederland"
+    },
+    {
+      "id": "archive-2",
+      "title": "Mannen Huilen Niet",
+      "context": "Tour met Sjors van der Panne en Tommie Christiaan",
+      "period": "2022",
+      "location": "Nederland"
+    },
+    {
+      "id": "archive-3",
+      "title": "Mick Taylor Band - Guitar Hero Tour",
+      "context": "Tournees en optredens",
+      "period": "Archief",
+      "location": "Duitsland"
+    },
+    {
+      "id": "archive-4",
+      "title": "Blue Feather Festival met Dilana Smith",
+      "context": "Festivaloptreden",
+      "period": "2022",
+      "location": "Canada"
+    },
+    {
+      "id": "archive-5",
+      "title": "Mondo Leone - New York Film Festival",
+      "context": "Internationaal optreden",
+      "period": "Archief",
+      "location": "Verenigde Staten"
+    },
+    {
+      "id": "archive-6",
+      "title": "Smokey Wilson & Big Jay McNeely European Tours",
+      "context": "Blues/rock tours",
+      "period": "Archief",
+      "location": "Europa"
+    }
+  ],
+  "expandableLists": [
+    {
+      "id": "collabs-main",
+      "title": "Samengewerkt met",
+      "sectionId": "bio",
+      "items": [
+        "Kaz Lux",
+        "Ge Reinders",
+        "Jan Akkerman",
+        "Rafael Hekker",
+        "De Andersons",
+        "Dirk Vermeij",
+        "Janos Koolen",
+        "Ivo Severijns",
+        "Astrid Tan",
+        "Peter Blanker",
+        "Dilana Smith",
+        "Sjors van der Panne",
+        "Tommie Christiaan",
+        "Mick Taylor",
+        "Smokey Wilson",
+        "Byther Smith",
+        "Jann James",
+        "Big Jay McNeely"
+      ],
+      "defaultVisibleCount": 12,
+      "expandLabel": "Toon meer namen"
+    }
+  ]
+}
