@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import { ContactForm } from "@/components/contact-form";
 import { DiscographyCard } from "@/components/discography-card";
 import { ExpandableList } from "@/components/expandable-list";
+import { ThemeControlPanel } from "@/components/theme-control-panel";
 import { TopNav } from "@/components/top-nav";
 import { VideoModal } from "@/components/video-modal";
 import { ButtonLink } from "@/components/ui/button-link";
@@ -167,6 +168,7 @@ export default function HomePage() {
         Ga naar inhoud
       </a>
       <TopNav items={sectionOrder} />
+      <ThemeControlPanel />
 
       <main id="main-content">
         <section

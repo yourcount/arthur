@@ -23,6 +23,91 @@
   --ease-exit: cubic-bezier(0.4, 0, 1, 1);
 }
 
+[data-theme="default"] {
+  --bg: #f3f6fb;
+  --surface: #ffffff;
+  --text: #0f172a;
+  --muted: #475569;
+  --accent: #ff5a3d;
+  --line: #cbd5e1;
+  --wood-dark: #ff5a3d;
+  --cymbal: #eab308;
+  --metal: #06b6d4;
+  --section-alt: #eaf0fb;
+  --nav-bg: #0f172a;
+  --hero-bg-deep: #0b1020;
+  --hero-bg-mid: #16213e;
+  --hero-bg-warm: #ff5a3d;
+}
+
+[data-theme="electric-night"] {
+  --bg: #090c17;
+  --surface: #131a2f;
+  --text: #f4f8ff;
+  --muted: #b5c2dd;
+  --accent: #14b8a6;
+  --line: #27314f;
+  --wood-dark: #f43f5e;
+  --cymbal: #f59e0b;
+  --metal: #22d3ee;
+  --section-alt: #0e1426;
+  --nav-bg: #080d1c;
+  --hero-bg-deep: #070b17;
+  --hero-bg-mid: #101a33;
+  --hero-bg-warm: #f43f5e;
+}
+
+[data-theme="copper-wood"] {
+  --bg: #f5efe8;
+  --surface: #fffaf5;
+  --text: #241912;
+  --muted: #6d5649;
+  --accent: #c2410c;
+  --line: #ddc4af;
+  --wood-dark: #9a3412;
+  --cymbal: #f59e0b;
+  --metal: #1d4ed8;
+  --section-alt: #efe2d6;
+  --nav-bg: #2a1f1a;
+  --hero-bg-deep: #24150f;
+  --hero-bg-mid: #45271a;
+  --hero-bg-warm: #d97706;
+}
+
+[data-theme="retro-sunburst"] {
+  --bg: #f9f4e6;
+  --surface: #fffdf7;
+  --text: #1f1d1a;
+  --muted: #63564d;
+  --accent: #ef4444;
+  --line: #e7d8c7;
+  --wood-dark: #b91c1c;
+  --cymbal: #f59e0b;
+  --metal: #0891b2;
+  --section-alt: #f6ecda;
+  --nav-bg: #1a1a1a;
+  --hero-bg-deep: #17110f;
+  --hero-bg-mid: #43210f;
+  --hero-bg-warm: #f97316;
+}
+
+[data-theme="mono-metal"] {
+  --bg: #eef2f7;
+  --surface: #ffffff;
+  --text: #0f172a;
+  --muted: #475569;
+  --accent: #64748b;
+  --line: #cbd5e1;
+  --wood-dark: #334155;
+  --cymbal: #94a3b8;
+  --metal: #22d3ee;
+  --section-alt: #e7edf5;
+  --nav-bg: #0f172a;
+  --hero-bg-deep: #020617;
+  --hero-bg-mid: #1e293b;
+  --hero-bg-warm: #334155;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -39,7 +124,11 @@ html {
 
 body {
   min-height: 100vh;
-  background: linear-gradient(180deg, #f2ece3 0%, #f7f1e9 100%);
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--bg) 80%, white) 0%,
+    color-mix(in oklab, var(--section-alt) 70%, white) 100%
+  );
   color: var(--text);
   font-family: var(--font-body), "Segoe UI", sans-serif;
   line-height: 1.55;
@@ -360,4 +449,102 @@ summary:focus-visible {
   h1 {
     line-height: 0.95;
   }
+}
+
+.theme-panel {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 45;
+  width: min(330px, calc(100% - 2rem));
+}
+
+.theme-panel-toggle {
+  width: 100%;
+  border: 1px solid color-mix(in oklab, var(--line) 78%, black);
+  background: color-mix(in oklab, var(--surface) 86%, black);
+  color: var(--text);
+  border-radius: 0.75rem;
+  padding: 0.7rem 0.9rem;
+  text-align: left;
+  font-weight: 700;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.16);
+}
+
+.theme-panel-body {
+  margin-top: 0.6rem;
+  border: 1px solid color-mix(in oklab, var(--line) 78%, black);
+  border-radius: 0.95rem;
+  background: color-mix(in oklab, var(--surface) 95%, black);
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.2);
+  padding: 0.8rem;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition:
+    opacity var(--motion-base) var(--ease-standard),
+    transform var(--motion-base) var(--ease-standard);
+}
+
+.theme-panel-body.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.theme-panel-title {
+  margin: 0 0 0.55rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.theme-panel-list {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.theme-preset {
+  border: 1px solid var(--line);
+  background: color-mix(in oklab, var(--surface) 94%, black);
+  color: var(--text);
+  border-radius: 0.75rem;
+  padding: 0.55rem 0.65rem;
+  display: grid;
+  gap: 0.28rem;
+  text-align: left;
+}
+
+.theme-preset.is-active {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px color-mix(in oklab, var(--accent) 25%, transparent);
+}
+
+.theme-preset-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.theme-preset-description {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.theme-swatch-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.theme-swatch {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 9999px;
+  border: 1px solid color-mix(in oklab, black 22%, transparent);
 }
