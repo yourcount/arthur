@@ -7,12 +7,12 @@
   },
   "sectionHeaders": {
     "home": {
-      "title": "Arthur Bont!",
-      "intro": "Drummer, percussionist en cajon specialist met focus op live, studio en educatie."
+      "title": "Arthur Bont",
+      "intro": "Arthur Bont is drummer, percussionist en cajon specialist voor live-optredens, studio-opnames en lessen."
     },
     "bio": {
       "title": "Bio",
-      "intro": "Ervaren podium- en studiomuzikant met brede samenwerkingservaring in binnen- en buitenland."
+      "intro": "Ervaren podium- en studiomuzikant met internationale praktijk in live, studio en theater."
     },
     "milk": {
       "title": "Milk 2.0",
@@ -20,7 +20,7 @@
     },
     "discografie": {
       "title": "Discografie",
-      "intro": "Selectie van releases in chronologische volgorde van nieuw naar oud."
+      "intro": "Een selectie releases waarop Arthur meespeelt, van recente producties tot eerder werk."
     },
     "dvd": {
       "title": "DVD Cajon Spelen",
@@ -28,7 +28,7 @@
     },
     "gigs": {
       "title": "Gigs/Studio",
-      "intro": "Boekbaar voor live-optredens en studio-opnames op drums, cajon en percussie."
+      "intro": "Boekbaar voor live-optredens en studio-opnames op drums, cajon en percussie, met focus op timing en dynamiek."
     },
     "optredens": {
       "title": "Optredens",
@@ -40,7 +40,7 @@
     },
     "contact": {
       "title": "Contact",
-      "intro": "Direct contact voor boekingen, lessen en studio-aanvragen."
+      "intro": "Direct contact voor boekingen, lessen en studio-aanvragen. Vermeld bij voorkeur datum, locatie en type aanvraag."
     }
   },
   "richTextBlocks": [
@@ -49,8 +49,8 @@
       "sectionId": "bio",
       "heading": "Carriere-overzicht",
       "body": [
-        "Als bandlid van Louisiana Radio speelde Arthur tussen 1991 en 1999 op festivals en in het binnen- en buitenlandse clubcircuit.",
-        "Daarna volgden Europese tours met internationale artiesten uit blues, rock en singer-songwriter, met optredens in ruim dertig landen."
+        "Als bandlid van Louisiana Radio speelde Arthur van 1991 tot 1999 op festivals en in het clubcircuit in binnen- en buitenland.",
+        "Daarna volgden tours met internationale artiesten uit blues, rock en singer-songwriter in meer dan dertig landen."
       ]
     },
     {
@@ -58,7 +58,7 @@
       "sectionId": "bio",
       "heading": "Studio en theater",
       "body": [
-        "Als studiomuzikant speelt Arthur op drums en percussie op albums, tracks en producties.",
+        "Arthur levert als studiomuzikant drum- en percussiepartijen voor albums, tracks en producties.",
         "Daarnaast werkte hij mee aan theatertournees en voorstellingen met onder meer De Andersons, Jeroen Schipper en Hans Visser & Friends."
       ]
     },
@@ -68,7 +68,8 @@
       "heading": "Aanbod",
       "body": [
         "Live: inzetbaar voor concerten, theatershows en festivals.",
-        "Studio: inspelen van drum- en percussiepartijen voor albums, losse tracks en producties."
+        "Studio: inspelen van drum- en percussiepartijen voor albums, losse tracks en producties.",
+        "Aanvragen op maat: inzet en planning in overleg."
       ]
     },
     {

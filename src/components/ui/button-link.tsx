@@ -13,15 +13,14 @@ export function ButtonLink({
   newTab = false,
   children,
 }: ButtonLinkProps) {
-  const baseClass =
-    "inline-flex items-center justify-center rounded-lg border px-4 py-2.5 text-sm font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]";
+  const baseClass = "btn-link inline-flex items-center justify-center border px-4 py-2.5 text-sm font-semibold";
 
   const variantClass =
     variant === "primary"
-      ? "border-[var(--accent)] bg-[var(--accent)] text-white hover:brightness-95"
+      ? "btn-link-primary"
       : variant === "inverted"
-        ? "border-white/35 bg-white/8 text-white hover:bg-white/15"
-        : "border-[var(--line)] bg-white !text-slate-900 hover:bg-slate-100";
+        ? "btn-link-inverted"
+        : "btn-link-secondary";
 
   if (newTab) {
     return (

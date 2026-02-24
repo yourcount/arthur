@@ -7,7 +7,6 @@ import { DiscographyCard } from "@/components/discography-card";
 import { ExpandableList } from "@/components/expandable-list";
 import { ThemeControlPanel } from "@/components/theme-control-panel";
 import { TopNav } from "@/components/top-nav";
-import { VideoModal } from "@/components/video-modal";
 import { ButtonLink } from "@/components/ui/button-link";
 import { Card } from "@/components/ui/card";
 import { SectionShell } from "@/components/ui/section-shell";
@@ -26,6 +25,51 @@ const sectionOrder: Array<{ id: SectionId; label: string }> = [
   { id: "contact", label: "Contact" },
 ];
 
+const bioTimeline = [
+  { period: "1991-1999", label: "Louisiana Radio", detail: "Festivals en clubcircuit in binnen- en buitenland." },
+  { period: "Daarna", label: "Internationale tours", detail: "Blues, rock en singer-songwriter in meer dan 30 landen." },
+  { period: "Nu", label: "Live, studio en theater", detail: "Inzetbaar voor producties, shows en educatie." },
+];
+
+const referenceHighlights = [
+  {
+    id: "ref-live",
+    quote: "Voorstellingen met onder meer Holland America Lijn, De Andersons en Sjors van der Panne.",
+    source: "Theatertournees",
+  },
+  {
+    id: "ref-studio",
+    quote: "Opnames op drums, cajon en percussie voor singles, EPs, albums en dvd-producties.",
+    source: "Studio releases",
+  },
+  {
+    id: "ref-international",
+    quote: "Tours en optredens in Europa, Verenigde Staten, Afrika en Canada.",
+    source: "Internationale ervaring",
+  },
+];
+
+const credibilityLinks = [
+  {
+    id: "cred-milk",
+    label: "Milk 2.0 project",
+    description: "Eigen project en artistieke signatuur.",
+    href: content.projectCards[0]?.link,
+  },
+  {
+    id: "cred-lesson",
+    label: "Drummersplace",
+    description: "Lessen en educatieve context.",
+    href: content.lessonBlocks[0]?.externalLink,
+  },
+  {
+    id: "cred-release",
+    label: "Recente release",
+    description: "Beluister geselecteerd werk.",
+    href: content.discographyItems.find((item) => item.platformUrl)?.platformUrl,
+  },
+].filter((item): item is { id: string; label: string; description: string; href: string } => Boolean(item.href));
+
 function getYoutubeVideoId(videoUrl: string) {
   const match = videoUrl.match(/[?&]v=([^&]+)/);
   return match ? match[1] : null;
@@ -33,7 +77,7 @@ function getYoutubeVideoId(videoUrl: string) {
 
 function getYoutubeThumbnail(videoUrl: string) {
   const id = getYoutubeVideoId(videoUrl);
-  return id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : null;
+  return id ? `https://i.ytimg.com/vi/${id}/mqdefault.jpg` : null;
 }
 
 const lessonLabel: Record<LessonBlock["lessonType"], string> = {
@@ -49,7 +93,6 @@ export default function HomePage() {
   const milkProject = content.projectCards[0];
   const collabList = content.expandableLists.find((list) => list.sectionId === "bio");
 
-  const [activeVideoIndex, setActiveVideoIndex] = useState<number | null>(null);
   const [featuredVideoIndex, setFeaturedVideoIndex] = useState(0);
   const [discTypeFilter, setDiscTypeFilter] = useState<string>("all");
   const [discYearFilter, setDiscYearFilter] = useState<string>("all");
@@ -60,6 +103,7 @@ export default function HomePage() {
   const [copyState, setCopyState] = useState<"idle" | "copied">("idle");
   const [isLiteMode, setIsLiteMode] = useState(false);
   const [showAllMedia, setShowAllMedia] = useState(false);
+  const [showAllReleases, setShowAllReleases] = useState(false);
 
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
@@ -100,7 +144,7 @@ export default function HomePage() {
 
     items.forEach((item) => observer.observe(item));
     return () => observer.disconnect();
-  }, [discView, showAllMedia]);
+  }, [discView, showAllMedia, showAllReleases]);
 
   const visibleMediaCount = showAllMedia ? content.mediaItems.length : isLiteMode ? 3 : 6;
 
@@ -121,6 +165,13 @@ export default function HomePage() {
       .slice()
       .sort((a, b) => b.year - a.year);
   }, [discTypeFilter, discYearFilter]);
+
+  const hasActiveDiscFilters = discTypeFilter !== "all" || discYearFilter !== "all";
+  const shouldShowAllDiscography = showAllReleases || hasActiveDiscFilters;
+  const visibleDiscography = useMemo(
+    () => (shouldShowAllDiscography ? filteredDiscography : filteredDiscography.slice(0, 3)),
+    [filteredDiscography, shouldShowAllDiscography],
+  );
 
   const galleryVideos = useMemo(
     () =>
@@ -148,6 +199,23 @@ export default function HomePage() {
       "Levering als complete takes of losse tracks in overleg.",
     ],
   };
+
+  const gigsVisuals = useMemo(() => {
+    const liveThumb = getYoutubeThumbnail(content.mediaItems[0]?.videoUrl ?? "");
+    const studioThumb = getYoutubeThumbnail(content.mediaItems[1]?.videoUrl ?? "");
+    return {
+      live: {
+        src: liveThumb ?? content.heroMedia.imageSrc,
+        alt: "Live setup van Arthur Bont",
+        caption: "Live context: podiumdynamiek en samenspel.",
+      },
+      studio: {
+        src: studioThumb ?? content.heroMedia.imageSrc,
+        alt: "Studio context van Arthur Bont",
+        caption: "Studio context: strakke takes en productiegericht spel.",
+      },
+    } as const;
+  }, []);
 
   const onCopyPayment = async () => {
     try {
@@ -179,11 +247,11 @@ export default function HomePage() {
           <div className="hero-stage w-full px-4 py-5 sm:px-6 sm:py-8 md:px-8 md:py-10">
             <div className="mx-auto grid min-h-[70svh] w-[min(1200px,100%)] gap-8 md:min-h-[calc(100svh-88px)] md:grid-cols-[1.1fr_.9fr] md:items-center md:gap-16">
               <figure
-                className={`hero-media-shell ${content.heroMedia.videoSrc && !isLiteMode ? "hero-has-video" : ""} order-1`}
+                className={`hero-media-shell ${content.heroMedia.videoSrc && !isLiteMode ? "hero-has-video" : ""} order-1 aspect-square overflow-hidden`}
               >
                 {content.heroMedia.videoSrc && !isLiteMode ? (
                   <video
-                    className="hero-media-video h-auto w-full rounded-xl border border-[var(--line)] object-cover"
+                    className="hero-media-video h-full w-full rounded-xl border border-[var(--line)] object-cover object-top"
                     autoPlay
                     loop
                     muted
@@ -201,7 +269,7 @@ export default function HomePage() {
                   width={1200}
                   height={720}
                   priority
-                  className="hero-media-image h-auto w-full rounded-xl border border-[var(--line)] object-cover"
+                  className="hero-media-image h-full w-full rounded-xl border border-[var(--line)] object-cover object-top"
                 />
               </figure>
 
@@ -217,15 +285,29 @@ export default function HomePage() {
                 <p className="max-w-2xl text-lg text-white/85">{content.sectionHeaders.home.intro}</p>
                 <div className="mb-8 flex flex-wrap gap-3 sm:mb-0">
                   <ButtonLink href="#gigs" variant="primary">
-                    Boek Gigs/Studio
+                    Boek Arthur voor Live/Studio
                   </ButtonLink>
                   <ButtonLink href="#discografie" variant="inverted">
-                    Bekijk Discografie
+                    Bekijk recente releases
                   </ButtonLink>
                   <ButtonLink href="#contact" variant="inverted">
-                    Contact
+                    Neem direct contact op
                   </ButtonLink>
                 </div>
+                <ul className="grid gap-2 text-sm text-white/80 sm:grid-cols-3" aria-label="Kernkwaliteiten">
+                  <li className="flex items-center gap-2">
+                    <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-[var(--cymbal)]" />
+                    <span>Timing en groove</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-[var(--metal)]" />
+                    <span>Dynamiek en samenspel</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
+                    <span>Live, studio en educatie</span>
+                  </li>
+                </ul>
               </article>
             </div>
           </div>
@@ -233,9 +315,9 @@ export default function HomePage() {
           <div className="mx-auto mt-12 sm:mt-16 lg:mt-20 w-[min(1200px,calc(100%-2rem))]">
             <Card>
               <h2 className="text-2xl font-semibold">Highlights</h2>
-              <ul className="mt-5 grid gap-4 sm:gap-5 md:grid-cols-3 lg:gap-6">
+              <ul className="cadence-group mt-5 grid gap-4 sm:gap-5 md:grid-cols-3 lg:gap-6">
                 {content.highlightItems.map((highlight) => (
-                  <li key={highlight.id} className="rounded-lg border border-[var(--line)] bg-white p-3">
+                  <li key={highlight.id} className="reveal-item rounded-lg border border-[var(--line)] bg-white p-3">
                     <p className="text-sm font-semibold">{highlight.label}</p>
                     <p className="text-sm text-[var(--muted)]">{highlight.description}</p>
                     <p className="mt-1 text-xs text-[var(--muted)]">{highlight.period}</p>
@@ -243,12 +325,80 @@ export default function HomePage() {
                 ))}
               </ul>
             </Card>
+            <Card className="mt-5">
+              <h3 className="text-xl font-semibold">Referenties uit het werk</h3>
+              <ul className="cadence-group mt-4 grid gap-4 md:grid-cols-3">
+                {referenceHighlights.map((item) => (
+                  <li key={item.id} className="reveal-item rounded-lg border border-[var(--line)] bg-white p-4">
+                    <p className="text-sm leading-relaxed">&quot;{item.quote}&quot;</p>
+                    <p className="mt-2 text-xs font-semibold tracking-wide text-[var(--muted)] uppercase">
+                      Bron: {item.source}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </Card>
+            {credibilityLinks.length > 0 ? (
+              <Card className="mt-5">
+                <h3 className="text-xl font-semibold">Uitgelichte projecten en releases</h3>
+                <ul className="cadence-group mt-4 grid gap-3 md:grid-cols-3">
+                  {credibilityLinks.map((item) => (
+                    <li key={item.id} className="reveal-item rounded-lg border border-[var(--line)] bg-white p-4">
+                      <p className="text-sm font-semibold">{item.label}</p>
+                      <p className="mt-1 text-sm text-[var(--muted)]">{item.description}</p>
+                      <a
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-2 inline-block text-sm font-semibold text-[var(--wood-dark)] underline underline-offset-4"
+                      >
+                        Bekijk
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </Card>
+            ) : null}
           </div>
 
         </section>
 
-        <SectionShell id="bio" title={content.sectionHeaders.bio.title} intro={content.sectionHeaders.bio.intro} alternating>
-          <div className="grid gap-8 lg:grid-cols-2">
+        <SectionShell
+          id="bio"
+          title={content.sectionHeaders.bio.title}
+          intro={content.sectionHeaders.bio.intro}
+          alternating
+          className="context-live"
+        >
+          <Card className="mb-6">
+            <div className="grid gap-5 lg:grid-cols-[0.7fr_1.3fr]">
+              <figure className="overflow-hidden rounded-xl border border-[var(--line)] bg-white">
+                <div className="relative aspect-[4/5] w-full">
+                  <Image
+                    src={content.heroMedia.imageSrc}
+                    alt="Portret van Arthur Bont tijdens een optreden"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 30vw"
+                    className="object-cover object-top"
+                  />
+                </div>
+                <figcaption className="media-caption">Arthur Bont live op drums.</figcaption>
+              </figure>
+              <div>
+                <h3 className="text-xl font-semibold">Carriere in vogelvlucht</h3>
+                <ol className="bio-timeline mt-4" aria-label="Carriere tijdlijn">
+                  {bioTimeline.map((item) => (
+                    <li key={`${item.period}-${item.label}`} className="bio-timeline-item">
+                      <p className="text-xs font-semibold tracking-wide text-[var(--muted)] uppercase">{item.period}</p>
+                      <p className="mt-1 font-semibold">{item.label}</p>
+                      <p className="text-sm text-[var(--muted)]">{item.detail}</p>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </div>
+          </Card>
+          <div className="cadence-group grid gap-8 lg:grid-cols-2">
             {bioBlocks.map((block) => (
               <Card key={block.id}>
                 <h3 className="text-2xl font-semibold">{block.heading}</h3>
@@ -304,6 +454,7 @@ export default function HomePage() {
           title={content.sectionHeaders.discografie.title}
           intro={content.sectionHeaders.discografie.intro}
           alternating
+          className="context-studio"
         >
           <Card className="mb-6">
             <div className="mb-4 flex flex-wrap gap-2">
@@ -379,11 +530,26 @@ export default function HomePage() {
           </Card>
 
           {discView === "releases" ? (
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {filteredDiscography.map((item) => (
-                <DiscographyCard key={item.id} item={item} />
-              ))}
-            </div>
+            <>
+              <p className="mb-2 text-xs font-semibold tracking-wide text-[var(--muted)] uppercase">Recente releases</p>
+              <p className="mb-4 text-sm text-[var(--muted)]">
+                Eerst de recente highlights, daarna kun je de volledige selectie openen.
+              </p>
+              <div className="cadence-group grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {visibleDiscography.map((item) => (
+                  <DiscographyCard key={item.id} item={item} />
+                ))}
+              </div>
+              {filteredDiscography.length > 3 && !hasActiveDiscFilters ? (
+                <button
+                  type="button"
+                  onClick={() => setShowAllReleases((value) => !value)}
+                  className="mt-5 rounded-lg border border-[var(--line)] bg-white px-4 py-2 text-sm font-semibold text-[var(--text)]"
+                >
+                  {showAllReleases ? "Toon minder releases" : "Toon volledige discografie"}
+                </button>
+              ) : null}
+            </>
           ) : null}
 
           {discView === "videos" ? (
@@ -397,41 +563,35 @@ export default function HomePage() {
                 <div className="grid gap-5">
                   <article className="video-gallery-card reveal-item overflow-hidden rounded-xl border border-[var(--line)] bg-white">
                     {!isLiteMode ? (
-                      <button
-                        type="button"
-                        className="video-gallery-hitarea group block w-full text-left"
-                        onClick={() => setActiveVideoIndex(safeFeaturedVideoIndex)}
-                        aria-label={`Open video: ${displayedVideos[safeFeaturedVideoIndex].title}`}
-                      >
-                        <div className="relative">
+                      <div className="video-gallery-hitarea block w-full text-left">
+                        <div className="aspect-video w-full">
+                          <iframe
+                            className="h-full w-full"
+                            src={`https://www.youtube.com/embed/${displayedVideos[safeFeaturedVideoIndex].videoId}`}
+                            title={displayedVideos[safeFeaturedVideoIndex].title}
+                            loading="lazy"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerPolicy="strict-origin-when-cross-origin"
+                            allowFullScreen
+                          />
+                        </div>
+                        <div className="p-4 sm:p-5">
+                          <h3 className="text-xl font-semibold">{displayedVideos[safeFeaturedVideoIndex].title}</h3>
+                        </div>
+                      </div>
+                    ) : (
+                      <div>
+                        <div className="aspect-video w-full overflow-hidden rounded-lg">
                           {getYoutubeThumbnail(displayedVideos[safeFeaturedVideoIndex].videoUrl) ? (
                             <Image
                               src={getYoutubeThumbnail(displayedVideos[safeFeaturedVideoIndex].videoUrl) ?? ""}
                               alt={`Thumbnail van video: ${displayedVideos[safeFeaturedVideoIndex].title}`}
                               width={1200}
                               height={675}
-                              className="h-auto w-full object-cover"
+                              className="h-full w-full object-cover"
                             />
                           ) : null}
-                          <span className="video-play-icon absolute inset-0 m-auto inline-flex h-16 w-16 items-center justify-center rounded-full">
-                            <span className="video-play-triangle" />
-                          </span>
                         </div>
-                        <div className="p-4 sm:p-5">
-                          <h3 className="text-xl font-semibold">{displayedVideos[safeFeaturedVideoIndex].title}</h3>
-                        </div>
-                      </button>
-                    ) : (
-                      <div className="relative">
-                        {getYoutubeThumbnail(displayedVideos[safeFeaturedVideoIndex].videoUrl) ? (
-                          <Image
-                            src={getYoutubeThumbnail(displayedVideos[safeFeaturedVideoIndex].videoUrl) ?? ""}
-                            alt={`Thumbnail van video: ${displayedVideos[safeFeaturedVideoIndex].title}`}
-                            width={1200}
-                            height={675}
-                            className="h-auto w-full object-cover"
-                          />
-                        ) : null}
                         <div className="p-4 sm:p-5">
                           <h3 className="text-xl font-semibold">{displayedVideos[safeFeaturedVideoIndex].title}</h3>
                           <a
@@ -460,15 +620,17 @@ export default function HomePage() {
                           aria-label={`Kies video: ${media.title}`}
                         >
                           {getYoutubeThumbnail(media.videoUrl) ? (
-                            <Image
-                              src={getYoutubeThumbnail(media.videoUrl) ?? ""}
-                              alt={`Thumbnail van video: ${media.title}`}
-                              width={260}
-                              height={146}
-                              className="h-[110px] w-[196px] rounded-lg object-cover sm:h-[120px] sm:w-[214px]"
-                            />
+                            <div className="relative aspect-video w-full">
+                              <Image
+                                src={getYoutubeThumbnail(media.videoUrl) ?? ""}
+                                alt={`Thumbnail van video: ${media.title}`}
+                                fill
+                                sizes="(max-width: 640px) 200px, 240px"
+                                className="rounded-lg object-cover"
+                              />
+                            </div>
                           ) : null}
-                          <p className="mt-2 min-h-10 text-sm font-semibold">{media.title}</p>
+                          <p className="video-thumb-title mt-2 text-sm font-semibold">{media.title}</p>
                         </button>
                       ))}
                     </div>
@@ -538,7 +700,13 @@ export default function HomePage() {
           </Card>
         </SectionShell>
 
-        <SectionShell id="gigs" title={content.sectionHeaders.gigs.title} intro={content.sectionHeaders.gigs.intro} alternating>
+        <SectionShell
+          id="gigs"
+          title={content.sectionHeaders.gigs.title}
+          intro={content.sectionHeaders.gigs.intro}
+          alternating
+          className={gigsMode === "live" ? "context-live" : "context-studio"}
+        >
           <Card>
             <div className="flex flex-wrap gap-2">
               <button
@@ -564,6 +732,18 @@ export default function HomePage() {
                 Studio
               </button>
             </div>
+            <figure className="mx-auto mt-5 max-w-3xl overflow-hidden rounded-xl border border-[var(--line)] bg-white">
+              <div className="relative aspect-[16/7] w-full">
+                <Image
+                  src={gigsVisuals[gigsMode].src}
+                  alt={gigsVisuals[gigsMode].alt}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 700px"
+                  className="object-cover object-center"
+                />
+              </div>
+              <figcaption className="media-caption">{gigsVisuals[gigsMode].caption}</figcaption>
+            </figure>
             <ul className="mt-6 space-y-3">
               {gigsDetails[gigsMode].map((line) => (
                 <li key={line} className="text-[var(--muted)]">
@@ -583,7 +763,7 @@ export default function HomePage() {
             ) : null}
             <div className="mt-6">
               <ButtonLink href="#contact" variant="primary">
-                Vraag beschikbaarheid
+                Start je boekingsaanvraag
               </ButtonLink>
             </div>
           </Card>
@@ -633,7 +813,35 @@ export default function HomePage() {
           </Card>
         </SectionShell>
 
-        <SectionShell id="lessen" title={content.sectionHeaders.lessen.title} intro={content.sectionHeaders.lessen.intro}>
+        <SectionShell
+          id="lessen"
+          title={content.sectionHeaders.lessen.title}
+          intro={content.sectionHeaders.lessen.intro}
+          className="context-education"
+        >
+          <Card className="mb-5">
+            <h3 className="text-xl font-semibold">Wat wil je leren?</h3>
+            <p className="mt-2 text-sm text-[var(--muted)]">
+              Kies hieronder je focus. Het juiste lesblok opent direct met praktische informatie.
+            </p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {content.lessonBlocks.map((lesson) => (
+                <button
+                  key={`lesson-choice-${lesson.id}`}
+                  type="button"
+                  onClick={() => setOpenLessonId(lesson.id)}
+                  className={`rounded-md border px-3 py-2 text-sm font-semibold ${
+                    openLessonId === lesson.id
+                      ? "border-[var(--wood-dark)] bg-white text-[var(--text)]"
+                      : "border-[var(--line)] bg-[var(--surface)] text-[var(--text)]"
+                  }`}
+                >
+                  {lessonLabel[lesson.lessonType]}
+                </button>
+              ))}
+            </div>
+          </Card>
+
           <div className="grid gap-5">
             {content.lessonBlocks.map((lesson) => {
               const isOpen = openLessonId === lesson.id;
@@ -672,7 +880,7 @@ export default function HomePage() {
                       {lesson.externalLink ? (
                         <div className="mt-6">
                           <ButtonLink href={lesson.externalLink} newTab>
-                            Drummersplace
+                            Vraag lesinformatie aan
                           </ButtonLink>
                         </div>
                       ) : null}
@@ -698,12 +906,6 @@ export default function HomePage() {
             >
               Mail
             </a>
-            <a
-              href="#contact-form"
-              className="rounded-md border border-[var(--line)] bg-white px-3 py-2 text-sm font-semibold text-[var(--text)]"
-            >
-              Formulier
-            </a>
           </div>
           <div className="grid gap-8 lg:grid-cols-2">
             <Card>
@@ -721,11 +923,14 @@ export default function HomePage() {
                 </a>
               </p>
               <p className="mt-3 text-[var(--muted)]">{content.contactInfo.practicalInfo}</p>
+              <p className="mt-2 text-sm text-[var(--muted)]">Je ontvangt zo snel mogelijk een reactie op je aanvraag.</p>
             </Card>
 
             <Card>
               <h3 className="text-2xl font-semibold">Contactformulier</h3>
-              <p className="mt-2 text-sm text-[var(--muted)]">Berichten worden verzonden via je e-mailclient.</p>
+              <p className="mt-2 text-sm text-[var(--muted)]">
+                Berichten worden verzonden via je e-mailclient. Vermeld bij voorkeur datum, locatie en type aanvraag.
+              </p>
               <div id="contact-form" className="mt-3">
                 <ContactForm contactInfo={content.contactInfo} />
               </div>
@@ -734,14 +939,6 @@ export default function HomePage() {
         </SectionShell>
       </main>
 
-      {activeVideoIndex !== null && displayedVideos.length > 0 ? (
-        <VideoModal
-          videos={displayedVideos}
-          activeIndex={activeVideoIndex}
-          onChangeIndex={setActiveVideoIndex}
-          onClose={() => setActiveVideoIndex(null)}
-        />
-      ) : null}
     </>
   );
 }

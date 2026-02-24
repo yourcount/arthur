@@ -35,6 +35,7 @@ export function ContactForm({ contactInfo }: { contactInfo: ContactInfo }) {
           name="Bericht"
           required
           rows={5}
+          placeholder="Bijv. 14 juni, Utrecht, live optreden of studio-opname"
           className="rounded-lg border border-[var(--line)] bg-white px-3 py-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
         />
       </label>

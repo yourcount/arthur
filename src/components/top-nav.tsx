@@ -77,23 +77,23 @@ export function TopNav({ items }: TopNavProps) {
       <div className="mx-auto flex w-[min(1200px,calc(100%-2rem))] items-center gap-4 py-3">
         <a
           href="#home"
-          className="min-w-fit rounded-md border border-white/20 bg-white/8 px-3 py-1.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+          className="brand-mark min-w-fit rounded-md border px-3 py-1.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
           aria-label="Arthur Bont Home"
         >
-          <p className="text-sm leading-none font-semibold tracking-[0.08em]">ARTHUR BONT</p>
-          <p className="mt-1 text-[11px] leading-none text-white/75">DRUMMER | PERCUSSIONIST</p>
+          <p className="brand-mark-title text-sm leading-none font-semibold tracking-[0.08em]">ARTHUR BONT</p>
+          <p className="brand-mark-sub mt-1 text-[11px] leading-none">DRUMMER | PERCUSSIONIST</p>
         </a>
 
-        <nav className="hidden flex-1 gap-2 overflow-x-auto md:flex" aria-label="Hoofd navigatie">
+        <nav className="hidden flex-1 items-center gap-2 overflow-x-auto overflow-y-visible md:flex" aria-label="Hoofd navigatie">
           {items.map((item) => (
             <a
               key={item.id}
               href={`#${item.id}`}
               onClick={() => setActiveId(item.id)}
               aria-current={activeId === item.id ? "page" : undefined}
-              className={`rounded-md border px-3 py-1.5 text-sm whitespace-nowrap transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] ${
+              className={`top-nav-link inline-flex items-center rounded-md border px-3 py-1.5 text-sm leading-none whitespace-nowrap transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] ${
                 activeId === item.id
-                  ? "border-[var(--metal)] bg-white/12 text-white"
+                  ? "is-active border-[var(--metal)] bg-white/12 text-white"
                 : "border-transparent text-white/90 hover:border-white/25 hover:text-white"
             }`}
           >
@@ -104,7 +104,7 @@ export function TopNav({ items }: TopNavProps) {
 
         <button
           type="button"
-          className="ml-auto rounded-md border border-white/30 bg-white/8 px-3 py-2 text-sm font-semibold md:hidden"
+          className="top-nav-menu-button ml-auto rounded-md border px-3 py-2 text-sm font-semibold md:hidden"
           aria-expanded={mobileOpen}
           aria-controls="mobile-main-nav"
           onClick={() => setMobileOpen((value) => !value)}
@@ -142,9 +142,9 @@ export function TopNav({ items }: TopNavProps) {
                   setMobileOpen(false);
                 }}
                 aria-current={activeId === item.id ? "page" : undefined}
-                className={`rounded-md border px-3 py-2.5 text-base font-semibold ${
+                className={`top-nav-link inline-flex items-center rounded-md border px-3 py-2.5 text-base leading-none font-semibold ${
                   activeId === item.id
-                    ? "border-[var(--metal)] bg-white/12 text-white"
+                    ? "is-active border-[var(--metal)] bg-white/12 text-white"
                     : "border-white/20 text-white/90"
                 }`}
               >
